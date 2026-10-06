@@ -23,7 +23,7 @@ public class Main1 {
         }
 
         Tabuleiro tabuleiro = new Tabuleiro(ax, ay);
-        tabuleiro.setMostrarAlimento(false); // o alimento fica escondido
+        tabuleiro.setMostrarAlimento(true); // o alimento fica escondido
         Robo r1 = new Robo("azul", "r1");
 
         System.out.println("\nAgora encontre o alimento!");

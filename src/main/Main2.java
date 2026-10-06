@@ -55,9 +55,10 @@ public class Main2 {
 
             tabuleiro.imprimirSituacao(robos);
 
-            if (vencedor == null) {
+            //If do continuar e parar o jogo
+            /*if (vencedor == null) {
                 encerrou = !continuar(sc);
-            }
+            }*/
         }
 
         System.out.println("=== Resultado ===");
@@ -72,10 +73,11 @@ public class Main2 {
         }
         sc.close();
     }
+    // Metodo para escolher continuar ou parar o jogo
 
-    private static boolean continuar(Scanner sc) {
+    /*private static boolean continuar(Scanner sc) {
         return lerInt(sc, "1 = continuar | 0 = encerrar: ", 0, 1) == 1;
-    }
+    }*/
 
     private static int lerInt(Scanner sc, String msg, int min, int max) {
         while (true) {

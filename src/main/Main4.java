@@ -46,8 +46,16 @@ public class Main4 {
             inserir(sc, tabuleiro, new Rocha(idObstaculo++), "rocha");
         }
 
-        Robo[] robos = { new Robo("azul", "r1"), new RoboInteligente("verde", "r2") };
+        //Robo[] robos = { new Robo("azul", "r1"), new RoboInteligente("verde", "r2") };
+        Robo roboNormal = new Robo("azul", "r1");
 
+        Robo roboInteligente =
+                new RoboInteligente("verde", "r2", roboNormal);
+
+        Robo[] robos = {
+                roboNormal,
+                roboInteligente
+        };
         System.out.println("\nr1 = robô normal | r2 = robô inteligente");
         tabuleiro.imprimir(robos);
         tabuleiro.imprimirSituacao(robos);
@@ -86,9 +94,10 @@ public class Main4 {
 
             boolean fimDeJogo = vencedor != null
                 || (robos[0].isExplodido() && robos[1].isExplodido());
-            if (!fimDeJogo) {
+            //If do continuar e parar o jogo
+            /*if (!fimDeJogo) {
                 encerrou = !continuar(sc);
-            }
+            }*/
         }
 
         System.out.println("=== Resultado ===");
@@ -121,10 +130,10 @@ public class Main4 {
             System.out.println("  Posição ocupada, igual à do alimento ou à inicial (0,0). Tente outra.");
         }
     }
-
-    private static boolean continuar(Scanner sc) {
+    // Metodo para escolher continuar ou parar o jogo
+    /*private static boolean continuar(Scanner sc) {
         return lerInt(sc, "1 = continuar | 0 = encerrar: ", 0, 1) == 1;
-    }
+    }*/
 
     private static int lerInt(Scanner sc, String msg, int min, int max) {
         while (true) {

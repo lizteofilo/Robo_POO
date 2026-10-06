@@ -25,7 +25,16 @@ public class Main3 {
         }
 
         Tabuleiro tabuleiro = new Tabuleiro(ax, ay);
-        Robo[] robos = { new Robo("azul", "r1"), new RoboInteligente("verde", "r2") };
+       // Robo[] robos = { new Robo("azul", "r1"), new RoboInteligente("verde", "r2") };
+        Robo roboNormal = new Robo("azul", "r1");
+
+        Robo roboInteligente =
+                new RoboInteligente("verde", "r2", roboNormal);
+
+        Robo[] robos = {
+                roboNormal,
+                roboInteligente
+        };
         boolean[] achou = new boolean[2];
 
         System.out.println("r1 = robô normal | r2 = robô inteligente");
@@ -58,10 +67,10 @@ public class Main3 {
             }
 
             tabuleiro.imprimirSituacao(robos);
-
-            if (!terminou(achou)) {
+            //If do continuar e parar o jogo
+            /*if (!terminou(achou)) {
                 encerrou = !continuar(sc);
-            }
+            }*/
         }
 
         System.out.println("=== Resultado ===");
@@ -83,10 +92,10 @@ public class Main3 {
         
         return achou[0] && achou[1];
     }
-
-    private static boolean continuar(Scanner sc) {
+    // Metodo para escolher continuar ou parar o jogo
+    /*private static boolean continuar(Scanner sc) {
         return lerInt(sc, "1 = continuar | 0 = encerrar: ", 0, 1) == 1;
-    }
+    }*/
 
     private static int lerInt(Scanner sc, String msg, int min, int max) {
         while (true) {
