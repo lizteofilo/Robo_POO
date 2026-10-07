@@ -6,19 +6,20 @@ public class Tabuleiro {
     public static boolean USAR_COR = true;
     public static int ATRASO_MS = 700;
 
-    private static final int LARG = 14;
-    private static final String PREFIXO = "    ";
+    private static final int LARG = 14;          
+    private static final String PREFIXO = "    "; 
 
     private int alimentoX;
     private int alimentoY;
     private boolean mostrarAlimento = true;
 
-
+   
     private Obstaculo[][] obstaculos = new Obstaculo[LADO][LADO];
 
     public Tabuleiro(int alimentoX, int alimentoY) {
         if (!posicaoValida(alimentoX, alimentoY)) {
-            throw new IllegalArgumentException("Posição do alimento fora do tabuleiro: (" + alimentoX + "," + alimentoY + ")");
+            throw new IllegalArgumentException(
+                "Posição do alimento fora do tabuleiro: (" + alimentoX + "," + alimentoY + ")");
         }
         this.alimentoX = alimentoX;
         this.alimentoY = alimentoY;
@@ -28,54 +29,49 @@ public class Tabuleiro {
         return x >= 0 && x < LADO && y >= 0 && y < LADO;
     }
 
-    public int getAlimentoX() {
-        return alimentoX;
-    }
+    public int getAlimentoX() { return alimentoX; }
+    public int getAlimentoY() { return alimentoY; }
 
-    public int getAlimentoY() {
-        return alimentoY;
-    }
-
-
+  
     public void setMostrarAlimento(boolean mostrarAlimento) {
         this.mostrarAlimento = mostrarAlimento;
     }
 
-
+  
     public boolean inserirObstaculo(Obstaculo o, int x, int y) {
         if (!posicaoValida(x, y)) return false;
         if (obstaculos[x][y] != null) return false;
-        if (x == alimentoX && y == alimentoY) return false;
-        if (x == 0 && y == 0) return false;
+        if (x == alimentoX && y == alimentoY) return false;  
+        if (x == 0 && y == 0) return false;               
         obstaculos[x][y] = o;
         return true;
     }
 
-
+   
     public void verificarObstaculo(Robo r) {
         if (r.isExplodido()) return;
         int x = r.getX();
         int y = r.getY();
         Obstaculo o = obstaculos[x][y];
         if (o != null) {
-            o.bater(r);
+            o.bater(r);                  
             if (r.isExplodido()) {
-                obstaculos[x][y] = null;
+                obstaculos[x][y] = null; 
             }
         }
     }
 
-
+   
     public static void pausar() {
         if (ATRASO_MS <= 0) return;
         try {
             Thread.sleep(ATRASO_MS);
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+            Thread.currentThread().interrupt(); 
         }
     }
 
-
+   
     public static String colorir(String texto, String cor) {
         if (!USAR_COR) return texto;
         String codigo = codigoCor(cor);
@@ -86,20 +82,13 @@ public class Tabuleiro {
     private static String codigoCor(String cor) {
         if (cor == null) return null;
         switch (cor.toLowerCase()) {
-            case "azul":
-                return "94";
-            case "verde":
-                return "92";
-            case "vermelho":
-                return "91";
-            case "amarelo":
-                return "93";
-            case "roxo":
-                return "95";
-            case "ciano":
-                return "96";
-            default:
-                return null;
+            case "azul":     return "94";
+            case "verde":    return "92";
+            case "vermelho": return "91";
+            case "amarelo":  return "93";
+            case "roxo":     return "95";
+            case "ciano":    return "96";
+            default:         return null;
         }
     }
 
@@ -138,7 +127,8 @@ public class Tabuleiro {
         System.out.println("Situação dos robôs:");
         for (Robo r : robos) {
             StringBuilder msg = new StringBuilder("  ");
-            msg.append(r.getRotulo()).append(" (").append(r.getCor()).append(", ").append(r.getTipo()).append(")");
+            msg.append(r.getRotulo())
+               .append(" (").append(r.getCor()).append(", ").append(r.getTipo()).append(")");
 
             if (r.isExplodido()) {
                 msg.append(" explodiu em (").append(r.getX()).append(",").append(r.getY()).append(")");
@@ -155,8 +145,8 @@ public class Tabuleiro {
 
 
     private String celula(int x, int y, Robo[] robos) {
-        StringBuilder visivel = new StringBuilder();
-        StringBuilder colorido = new StringBuilder();
+        StringBuilder visivel = new StringBuilder();   
+        StringBuilder colorido = new StringBuilder();  
 
         for (Robo r : robos) {
             if (!r.isExplodido() && r.getX() == x && r.getY() == y) {
