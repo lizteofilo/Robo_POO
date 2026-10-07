@@ -18,7 +18,6 @@ public class Robo {
 
     private boolean explodido;
 
-    // Guarda todas as posições por onde este robô já passou
     private List<String> posicoesVisitadas = new ArrayList<>();
 
 
@@ -28,6 +27,7 @@ public class Robo {
 
 
     public Robo(String cor, String nome) {
+
         this.cor = cor;
         this.nome = nome;
 
@@ -37,7 +37,6 @@ public class Robo {
         this.xAnterior = 0;
         this.yAnterior = 0;
 
-        // A posição inicial também conta como visitada
         posicoesVisitadas.add("0,0");
     }
 
@@ -46,40 +45,47 @@ public class Robo {
         return x;
     }
 
+
     public void setX(int x) {
         this.x = x;
     }
+
 
     public int getY() {
         return y;
     }
 
+
     public void setY(int y) {
         this.y = y;
     }
+
 
     public String getCor() {
         return cor;
     }
 
+
     public String getNome() {
         return nome;
     }
+
 
     public int getValidos() {
         return validos;
     }
 
+
     public int getInvalidos() {
         return invalidos;
     }
+
 
     public boolean isExplodido() {
         return explodido;
     }
 
 
-    // Retorna as posições que o robô já visitou
     public List<String> getPosicoesVisitadas() {
         return posicoesVisitadas;
     }
@@ -95,11 +101,13 @@ public class Robo {
     }
 
 
-    public void mover(String direcao) throws MovimentoInvalidoException {
+    public void mover(String direcao)
+            throws MovimentoInvalidoException {
 
         String d = (direcao == null)
                 ? ""
                 : direcao.trim().toLowerCase();
+
 
         int novoX = x;
         int novoY = y;
@@ -124,6 +132,7 @@ public class Robo {
                 break;
 
             default:
+
                 throw new MovimentoInvalidoException(
                         getRotulo()
                                 + ": Movimento inválido: comando desconhecido '"
@@ -141,29 +150,30 @@ public class Robo {
                             + ": Movimento inválido: '"
                             + nomeDirecao(d)
                             + "' levaria para ("
-                            + novoX + "," + novoY
-                            + "), fora da área"
+                            + novoX + ","
+                            + novoY + "), fora da área"
             );
         }
 
 
-        // Guarda a posição anterior
         xAnterior = x;
         yAnterior = y;
 
-        // Faz o movimento
         x = novoX;
         y = novoY;
 
         validos++;
 
-        // Guarda a nova posição na lista
-        posicoesVisitadas.add(x + "," + y);
+        posicoesVisitadas.add(
+                x + "," + y
+        );
+
 
         System.out.println(
                 getRotulo()
                         + " está em ("
-                        + x + "," + y + ")"
+                        + x + ","
+                        + y + ")"
         );
     }
 
@@ -212,6 +222,7 @@ public class Robo {
                 break;
 
             default:
+
                 throw new MovimentoInvalidoException(
                         getRotulo()
                                 + ": Movimento inválido: direção inexistente "
@@ -226,7 +237,8 @@ public class Robo {
             int alimentoX,
             int alimentoY) {
 
-        return x == alimentoX && y == alimentoY;
+        return x == alimentoX
+                && y == alimentoY;
     }
 
 
@@ -237,7 +249,8 @@ public class Robo {
         System.out.println(
                 getRotulo()
                         + " explodiu em ("
-                        + x + "," + y + ")!"
+                        + x + ","
+                        + y + ")!"
         );
     }
 
@@ -250,7 +263,16 @@ public class Robo {
         System.out.println(
                 getRotulo()
                         + " voltou para ("
-                        + x + "," + y + ")"
+                        + x + ","
+                        + y + ")"
         );
+    }
+
+
+    // Usado pelo robô inteligente para fazer backtracking
+    public void definirPosicao(int x, int y) {
+
+        this.x = x;
+        this.y = y;
     }
 }
