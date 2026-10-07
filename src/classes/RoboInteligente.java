@@ -7,24 +7,16 @@ import java.util.List;
 
 public class RoboInteligente extends Robo {
 
-    private static final String[] DIRECOES = {
-            "up",
-            "down",
-            "right",
-            "left"
-    };
+    private static final String[] DIRECOES = {"up", "down", "right", "left"};
 
 
     private Robo roboNormal;
 
     // Guarda o caminho atual do robô
-    private List<String> caminho =
-            new ArrayList<>();
+    private List<String> caminho = new ArrayList<>();
 
 
-    public RoboInteligente(
-            String cor,
-            Robo roboNormal) {
+    public RoboInteligente(String cor, Robo roboNormal) {
 
         super(cor);
 
@@ -34,10 +26,7 @@ public class RoboInteligente extends Robo {
     }
 
 
-    public RoboInteligente(
-            String cor,
-            String nome,
-            Robo roboNormal) {
+    public RoboInteligente(String cor, String nome, Robo roboNormal) {
 
         super(cor, nome);
 
@@ -54,8 +43,7 @@ public class RoboInteligente extends Robo {
 
 
     @Override
-    public void mover(String direcao)
-            throws MovimentoInvalidoException {
+    public void mover(String direcao) throws MovimentoInvalidoException {
 
         /*
          * Primeiro tenta a direção recebida.
@@ -76,15 +64,10 @@ public class RoboInteligente extends Robo {
          * tenta as outras três.
          */
 
-        List<String> candidatas =
-                new ArrayList<>(
-                        Arrays.asList(DIRECOES)
-                );
+        List<String> candidatas = new ArrayList<>(Arrays.asList(DIRECOES));
 
 
-        String d = direcao == null
-                ? ""
-                : direcao.trim().toLowerCase();
+        String d = direcao == null ? "" : direcao.trim().toLowerCase();
 
 
         candidatas.remove(d);
@@ -96,11 +79,7 @@ public class RoboInteligente extends Robo {
 
             if (podeExplorar(outra)) {
 
-                System.out.println(
-                        getRotulo()
-                                + " escolheu "
-                                + outra
-                );
+                System.out.println(getRotulo() + " escolheu " + outra);
 
                 super.mover(outra);
 
@@ -119,10 +98,7 @@ public class RoboInteligente extends Robo {
          * Faz backtracking.
          */
 
-        System.out.println(
-                getRotulo()
-                        + " chegou a um beco sem saída."
-        );
+        System.out.println(getRotulo() + " chegou a um beco sem saída.");
 
 
         voltarNoCaminho();
@@ -133,10 +109,7 @@ public class RoboInteligente extends Robo {
          * nova direção.
          */
 
-        List<String> novas =
-                new ArrayList<>(
-                        Arrays.asList(DIRECOES)
-                );
+        List<String> novas = new ArrayList<>(Arrays.asList(DIRECOES));
 
 
         Collections.shuffle(novas);
@@ -146,11 +119,7 @@ public class RoboInteligente extends Robo {
 
             if (podeExplorar(outra)) {
 
-                System.out.println(
-                        getRotulo()
-                                + " encontrou uma nova direção: "
-                                + outra
-                );
+                System.out.println(getRotulo() + " encontrou uma nova direção: " + outra);
 
                 super.mover(outra);
 
@@ -170,8 +139,7 @@ public class RoboInteligente extends Robo {
     }
 
 
-    private void moverDepoisDoBacktracking()
-            throws MovimentoInvalidoException {
+    private void moverDepoisDoBacktracking() throws MovimentoInvalidoException {
 
         /*
          * Enquanto houver posições anteriores
@@ -183,10 +151,7 @@ public class RoboInteligente extends Robo {
             voltarNoCaminho();
 
 
-            List<String> candidatas =
-                    new ArrayList<>(
-                            Arrays.asList(DIRECOES)
-                    );
+            List<String> candidatas = new ArrayList<>(Arrays.asList(DIRECOES));
 
 
             Collections.shuffle(candidatas);
@@ -196,11 +161,7 @@ public class RoboInteligente extends Robo {
 
                 if (podeExplorar(direcao)) {
 
-                    System.out.println(
-                            getRotulo()
-                                    + " voltou e encontrou "
-                                    + direcao
-                    );
+                    System.out.println(getRotulo() + " voltou e encontrou " + direcao);
 
                     super.mover(direcao);
 
@@ -212,10 +173,7 @@ public class RoboInteligente extends Robo {
         }
 
 
-        throw new MovimentoInvalidoException(
-                getRotulo()
-                        + ": não existem mais caminhos disponíveis."
-        );
+        throw new MovimentoInvalidoException(getRotulo() + ": não existem mais caminhos disponíveis.");
     }
 
 
@@ -226,12 +184,10 @@ public class RoboInteligente extends Robo {
 
     private boolean podeExplorar(String direcao) {
 
-        if (direcao == null)
-            return false;
+        if (direcao == null) return false;
 
 
-        String d =
-                direcao.trim().toLowerCase();
+        String d = direcao.trim().toLowerCase();
 
 
         int novoX = getX();
@@ -265,24 +221,20 @@ public class RoboInteligente extends Robo {
          * Está fora do tabuleiro?
          */
 
-        if (!Tabuleiro.posicaoValida(
-                novoX,
-                novoY)) {
+        if (!Tabuleiro.posicaoValida(novoX, novoY)) {
 
             return false;
         }
 
 
-        String novaPosicao =
-                novoX + "," + novoY;
+        String novaPosicao = novoX + "," + novoY;
 
 
         /*
          * O inteligente já explorou essa posição?
          */
 
-        if (getPosicoesVisitadas()
-                .contains(novaPosicao)) {
+        if (getPosicoesVisitadas().contains(novaPosicao)) {
 
             return false;
         }
@@ -292,10 +244,7 @@ public class RoboInteligente extends Robo {
          * O robô normal já passou por essa posição?
          */
 
-        if (roboNormal != null
-                && roboNormal
-                .getPosicoesVisitadas()
-                .contains(novaPosicao)) {
+        if (roboNormal != null && roboNormal.getPosicoesVisitadas().contains(novaPosicao)) {
 
             return false;
         }
@@ -311,9 +260,7 @@ public class RoboInteligente extends Robo {
 
     private void adicionarAoCaminho() {
 
-        caminho.add(
-                getX() + "," + getY()
-        );
+        caminho.add(getX() + "," + getY());
     }
 
 
@@ -330,48 +277,29 @@ public class RoboInteligente extends Robo {
 
     private void voltarNoCaminho() {
 
-        if (caminho.size() <= 1)
-            return;
+        if (caminho.size() <= 1) return;
 
 
         // Remove a posição atual
-        caminho.remove(
-                caminho.size() - 1
-        );
+        caminho.remove(caminho.size() - 1);
 
 
         // Pega a posição anterior
-        String anterior =
-                caminho.get(
-                        caminho.size() - 1
-                );
+        String anterior = caminho.get(caminho.size() - 1);
 
 
-        String[] partes =
-                anterior.split(",");
+        String[] partes = anterior.split(",");
 
 
-        int novoX =
-                Integer.parseInt(partes[0]);
+        int novoX = Integer.parseInt(partes[0]);
 
 
-        int novoY =
-                Integer.parseInt(partes[1]);
+        int novoY = Integer.parseInt(partes[1]);
 
 
-        definirPosicao(
-                novoX,
-                novoY
-        );
+        definirPosicao(novoX, novoY);
 
 
-        System.out.println(
-                getRotulo()
-                        + " voltou para ("
-                        + novoX
-                        + ","
-                        + novoY
-                        + ")"
-        );
+        System.out.println(getRotulo() + " voltou para (" + novoX + "," + novoY + ")");
     }
 }

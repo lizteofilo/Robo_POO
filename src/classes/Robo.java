@@ -101,12 +101,9 @@ public class Robo {
     }
 
 
-    public void mover(String direcao)
-            throws MovimentoInvalidoException {
+    public void mover(String direcao) throws MovimentoInvalidoException {
 
-        String d = (direcao == null)
-                ? ""
-                : direcao.trim().toLowerCase();
+        String d = (direcao == null) ? "" : direcao.trim().toLowerCase();
 
 
         int novoX = x;
@@ -133,11 +130,7 @@ public class Robo {
 
             default:
 
-                throw new MovimentoInvalidoException(
-                        getRotulo()
-                                + ": Movimento inválido: comando desconhecido '"
-                                + direcao + "'"
-                );
+                throw new MovimentoInvalidoException(getRotulo() + ": Movimento inválido: comando desconhecido '" + direcao + "'");
         }
 
 
@@ -145,14 +138,7 @@ public class Robo {
 
             invalidos++;
 
-            throw new MovimentoInvalidoException(
-                    getRotulo()
-                            + ": Movimento inválido: '"
-                            + nomeDirecao(d)
-                            + "' levaria para ("
-                            + novoX + ","
-                            + novoY + "), fora da área"
-            );
+            throw new MovimentoInvalidoException(getRotulo() + ": Movimento inválido: '" + nomeDirecao(d) + "' levaria para (" + novoX + "," + novoY + "), fora da área");
         }
 
 
@@ -164,17 +150,10 @@ public class Robo {
 
         validos++;
 
-        posicoesVisitadas.add(
-                x + "," + y
-        );
+        posicoesVisitadas.add(x + "," + y);
 
 
-        System.out.println(
-                getRotulo()
-                        + " está em ("
-                        + x + ","
-                        + y + ")"
-        );
+        System.out.println(getRotulo() + " está em (" + x + "," + y + ")");
     }
 
 
@@ -200,8 +179,7 @@ public class Robo {
     }
 
 
-    public void mover(int direcao)
-            throws MovimentoInvalidoException {
+    public void mover(int direcao) throws MovimentoInvalidoException {
 
         switch (direcao) {
 
@@ -223,22 +201,14 @@ public class Robo {
 
             default:
 
-                throw new MovimentoInvalidoException(
-                        getRotulo()
-                                + ": Movimento inválido: direção inexistente "
-                                + direcao
-                                + " (use 1 a 4)"
-                );
+                throw new MovimentoInvalidoException(getRotulo() + ": Movimento inválido: direção inexistente " + direcao + " (use 1 a 4)");
         }
     }
 
 
-    public boolean encontrouAlimento(
-            int alimentoX,
-            int alimentoY) {
+    public boolean encontrouAlimento(int alimentoX, int alimentoY) {
 
-        return x == alimentoX
-                && y == alimentoY;
+        return x == alimentoX && y == alimentoY;
     }
 
 
@@ -246,12 +216,7 @@ public class Robo {
 
         explodido = true;
 
-        System.out.println(
-                getRotulo()
-                        + " explodiu em ("
-                        + x + ","
-                        + y + ")!"
-        );
+        System.out.println(getRotulo() + " explodiu em (" + x + "," + y + ")!");
     }
 
 
@@ -260,12 +225,7 @@ public class Robo {
         x = xAnterior;
         y = yAnterior;
 
-        System.out.println(
-                getRotulo()
-                        + " voltou para ("
-                        + x + ","
-                        + y + ")"
-        );
+        System.out.println(getRotulo() + " voltou para (" + x + "," + y + ")");
     }
 
 

@@ -7,6 +7,7 @@ import src.classes.Robo;
 import src.classes.RoboInteligente;
 import src.classes.Tabuleiro;
 import src.classes.MovimentoInvalidoException;
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -81,19 +82,19 @@ public class Main4 {
 
                 tabuleiro.verificarObstaculo(atual);
 
-                tabuleiro.imprimir(robos);  
-                Tabuleiro.pausar();          
+                tabuleiro.imprimir(robos);
+                Tabuleiro.pausar();
 
                 if (!atual.isExplodido() && atual.encontrouAlimento(ax, ay)) {
                     vencedor = atual;
-                    break; 
+                    break;
                 }
             }
 
             tabuleiro.imprimirSituacao(robos);
 
             boolean fimDeJogo = vencedor != null
-                || (robos[0].isExplodido() && robos[1].isExplodido());
+                    || (robos[0].isExplodido() && robos[1].isExplodido());
             //If do continuar e parar o jogo
             /*if (!fimDeJogo) {
                 encerrou = !continuar(sc);
@@ -112,10 +113,10 @@ public class Main4 {
         }
         for (Robo r : robos) {
             String situacao = r.isExplodido() ? "explodiu"
-                : (r.encontrouAlimento(ax, ay) ? "encontrou o alimento" : "não chegou ao alimento");
+                    : (r.encontrouAlimento(ax, ay) ? "encontrou o alimento" : "não chegou ao alimento");
             System.out.println(r.getRotulo() + " (" + situacao + "): "
-                + r.getValidos() + " movimentos válidos e " + r.getInvalidos() + " inválidos"
-                + " (total de tentativas: " + (r.getValidos() + r.getInvalidos()) + ")");
+                    + r.getValidos() + " movimentos válidos e " + r.getInvalidos() + " inválidos"
+                    + " (total de tentativas: " + (r.getValidos() + r.getInvalidos()) + ")");
         }
         sc.close();
     }
@@ -142,7 +143,7 @@ public class Main4 {
                 int v = Integer.parseInt(sc.next().trim());
                 if (v >= min && v <= max) return v;
             } catch (NumberFormatException e) {
-              
+
             }
             System.out.println("Valor inválido. Digite um inteiro entre " + min + " e " + max + ".");
         }
