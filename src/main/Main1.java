@@ -1,8 +1,9 @@
 package src.main;
 
-import src.classes.Tabuleiro;   
+import src.classes.Tabuleiro;
 import src.classes.Robo;
 import src.classes.MovimentoInvalidoException;
+
 import java.util.Scanner;
 
 
@@ -13,7 +14,7 @@ public class Main1 {
         int ultimo = Tabuleiro.LADO - 1;
 
         System.out.println("Área de " + Tabuleiro.LADO + "x" + Tabuleiro.LADO
-            + " (coordenadas de 0 a " + ultimo + "). O robô começa em (0,0).");
+                + " (coordenadas de 0 a " + ultimo + "). O robô começa em (0,0).");
         int ax = lerInt(sc, "Posição x do alimento: ", 0, ultimo);
         int ay = lerInt(sc, "Posição y do alimento: ", 0, ultimo);
         while (ax == 0 && ay == 0) {
@@ -23,7 +24,7 @@ public class Main1 {
         }
 
         Tabuleiro tabuleiro = new Tabuleiro(ax, ay);
-        tabuleiro.setMostrarAlimento(false); // o alimento fica escondido
+        tabuleiro.setMostrarAlimento(true); // o alimento fica escondido
         Robo r1 = new Robo("azul", "r1");
 
         System.out.println("\nAgora encontre o alimento!");
@@ -53,7 +54,7 @@ public class Main1 {
             System.out.println(r1.getRotulo() + " encontrou o alimento em (" + ax + "," + ay + ")!");
         }
         System.out.println(r1.getRotulo() + ": " + r1.getValidos()
-            + " movimentos válidos e " + r1.getInvalidos() + " inválidos");
+                + " movimentos válidos e " + r1.getInvalidos() + " inválidos");
         sc.close();
     }
 
@@ -64,7 +65,7 @@ public class Main1 {
                 int v = Integer.parseInt(sc.next().trim());
                 if (v >= min && v <= max) return v;
             } catch (NumberFormatException e) {
-                
+
             }
             System.out.println("Valor inválido. Digite um inteiro entre " + min + " e " + max + ".");
         }
